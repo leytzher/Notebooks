@@ -1,0 +1,496 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16934,        488]
+NotebookOptionsPosition[     15931,        448]
+NotebookOutlinePosition[     16315,        465]
+CellTagsIndexPosition[     16272,        462]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["General Code", "Section",
+ CellChangeTimes->{{3.6910548325035686`*^9, 3.691054834749442*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetCoordinates", "[", "z_", "]"}], "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Re", "[", "z", "]"}], ",", 
+      RowBox[{"Im", "[", "z", "]"}]}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PolygonCoordinates", "[", "z_List", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"dupgone", ",", "polygonCoordinates"}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Eliminate", " ", "duplicates", " ", "from", " ", "the", " ", "list"}],
+        "*)"}], 
+      RowBox[{
+       RowBox[{"dupgone", "=", 
+        RowBox[{"DeleteDuplicates", "[", "z", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"Get", " ", "coordinates", " ", "in", " ", "x"}], ",", 
+         RowBox[{"y", " ", "format"}]}], "*)"}], 
+       RowBox[{"polygonCoordinates", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"GetCoordinates", "[", "#", "]"}], "&"}], "/@", 
+         "dupgone"}]}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PlotPolygon", "[", "polygonCoord_List", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "closedp", "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{"close", " ", "polygon"}], "*)"}], 
+      RowBox[{
+       RowBox[{"closedp", "=", 
+        RowBox[{"Append", "[", 
+         RowBox[{"polygonCoord", ",", 
+          RowBox[{"First", "[", "polygonCoord", "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ListLinePlot", "[", "closedp", "]"}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"CalculateAngle", "[", 
+     RowBox[{"{", 
+      RowBox[{"vertex1_", ",", "vertex2_", ",", "vertex3_"}], "}"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "vector1", ",", "vector2", ",", "magnitudeVector1", ",", 
+        "magnitudeVector2", ",", "angle"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"vector1", "=", 
+        RowBox[{"vertex2", "-", "vertex1"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"vector2", "=", 
+        RowBox[{"vertex3", "-", "vertex2"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"magnitudeVector1", "=", 
+        RowBox[{"Sqrt", "[", 
+         RowBox[{"vector1", ".", "vector1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"magnitudeVector2", "=", 
+        RowBox[{"Sqrt", "[", 
+         RowBox[{"vector2", ".", "vector2"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"angle", "=", 
+        RowBox[{"ArcCos", "[", 
+         RowBox[{
+          RowBox[{"Dot", "[", 
+           RowBox[{"vector1", ",", "vector2"}], "]"}], "/", 
+          RowBox[{"(", 
+           RowBox[{"magnitudeVector1", " ", "magnitudeVector2"}], ")"}]}], 
+         "]"}]}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"CalculateVectorMagnitude", "[", 
+     RowBox[{"{", 
+      RowBox[{"vertex1_", ",", "vertex2_"}], "}"}], "]"}], ":=", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"vertex2", "-", "vertex1"}], ")"}], ".", 
+      RowBox[{"(", 
+       RowBox[{"vertex2", "-", "vertex1"}], ")"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"CalculateCrossProduct", "[", 
+     RowBox[{"{", 
+      RowBox[{"vertex1_", ",", "vertex2_", ",", "vertex3_"}], "}"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"vector1", ",", "vector2", ",", "crossProduct"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"vector1", "=", 
+        RowBox[{"vertex2", "-", "vertex1"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"vector2", "=", 
+        RowBox[{"vertex3", "-", "vertex2"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"crossProduct", "=", 
+        RowBox[{"Cross", "[", 
+         RowBox[{"vector1", ",", "vector2"}], "]"}]}]}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PolygonSides", "[", "polygon_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "sideList", "}"}], ",", 
+      RowBox[{
+       RowBox[{"sideList", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"sideList", ",", 
+           RowBox[{"CalculateVectorMagnitude", "[", 
+            RowBox[{"Take", "[", 
+             RowBox[{
+              RowBox[{"RotateLeft", "[", 
+               RowBox[{"polygon", ",", "n"}], "]"}], ",", "2"}], "]"}], 
+            "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", "0", ",", 
+           RowBox[{
+            RowBox[{"Length", "[", "polygon", "]"}], "-", "1"}]}], "}"}]}], 
+        "]"}], ";", "\[IndentingNewLine]", "sideList"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PolygonAngles", "[", "polygon_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "anglesFromCos", ",", "vertices3D", ",", "crossProducts", ",", "signs",
+         ",", "signedAnglesFromCos", ",", "sumOfAngles", ",", 
+        "correctedAngles"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"anglesFromCos", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"crossProducts", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"anglesFromCos", ",", 
+           RowBox[{"CalculateAngle", "[", 
+            RowBox[{"Take", "[", 
+             RowBox[{
+              RowBox[{"RotateLeft", "[", 
+               RowBox[{"polygon", ",", "n"}], "]"}], ",", "3"}], "]"}], 
+            "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", "0", ",", 
+           RowBox[{
+            RowBox[{"Length", "[", "polygon", "]"}], "-", "1"}]}], "}"}]}], 
+        "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "convert", " ", "vertices", " ", "to", " ", "3", "D", " ", "points"}],
+         "*)"}], 
+       RowBox[{"vertices3D", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Append", "[", 
+           RowBox[{"#", ",", "0"}], "]"}], "&"}], "/@", "polygon"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"now", " ", "try", " ", "cross", " ", "products"}], "*)"}], 
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"crossProducts", ",", 
+           RowBox[{"CalculateCrossProduct", "[", 
+            RowBox[{"Take", "[", 
+             RowBox[{
+              RowBox[{"RotateLeft", "[", 
+               RowBox[{"vertices3D", ",", "n"}], "]"}], ",", "3"}], "]"}], 
+            "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", "0", ",", 
+           RowBox[{
+            RowBox[{"Length", "[", "vertices3D", "]"}], "-", "1"}]}], "}"}]}],
+         "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"get", " ", "signs", " ", "of", " ", "the", " ", "z"}], "-", 
+         "index"}], "*)"}], 
+       RowBox[{"signs", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Sign", "@", 
+           RowBox[{"Last", "[", "#", "]"}]}], "&"}], "/@", 
+         "crossProducts"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "now", " ", "we", " ", "use", " ", "the", " ", "signs", " ", "to", 
+         " ", "modify", " ", "the", " ", "values", " ", "of", " ", "the", " ",
+          "angles", " ", "obtained", " ", "from", " ", "Cosine", " ", 
+         "formula", " ", 
+         RowBox[{"(", 
+          RowBox[{"dot", " ", "product"}], ")"}]}], "*)"}], 
+       RowBox[{"signedAnglesFromCos", "=", 
+        RowBox[{"anglesFromCos", "*", "signs"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"calculate", " ", "sum", " ", "of", " ", "angles"}], "*)"}], 
+       RowBox[{"sumOfAngles", "=", 
+        RowBox[{"Total", "[", "signedAnglesFromCos", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"correctedAngles", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"sumOfAngles", "\[Equal]", 
+           RowBox[{"2", " ", "Pi"}]}], ",", 
+          RowBox[{"Pi", "-", "signedAnglesFromCos"}], ",", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"sumOfAngles", "\[Equal]", 
+             RowBox[{
+              RowBox[{"-", "2"}], " ", "Pi"}]}], ",", 
+            RowBox[{"Pi", "+", "signedAnglesFromCos"}], ",", 
+            RowBox[{"Print", "[", "\"\<Error\>\"", "]"}]}], "]"}]}], "]"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "rotateRight", " ", "one", " ", "time", " ", "to", " ", "set", " ", 
+         "proper", " ", "angle", " ", "order"}], "*)"}], 
+       RowBox[{"RotateRight", "[", "correctedAngles", "]"}]}]}], "]"}]}], 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SideRatios", "[", "sides_", "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"sides", "[", 
+       RowBox[{"[", "#", "]"}], "]"}], "/", 
+      RowBox[{"sides", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "&"}], "/@", 
+    RowBox[{"Range", "[", 
+     RowBox[{"Length", "[", "sides", "]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Alpha", "[", "interiorAngles_", "]"}], ":=", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"interiorAngles", "/", "Pi"}], ")"}], " ", "-", " ", "1"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.691054744093864*^9, 3.691054760377927*^9}, {
+   3.691054796005352*^9, 3.691054824915429*^9}, {3.6910552340132217`*^9, 
+   3.691055256337816*^9}, {3.691055452487516*^9, 3.691055491613453*^9}, 
+   3.6910558780845003`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polyList", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"4", "+", 
+      RowBox[{"0.45", "I"}]}], ",", " ", 
+     RowBox[{"6.05", "+", 
+      RowBox[{"1.85", "I"}]}], ",", " ", 
+     RowBox[{"7.25", "+", 
+      RowBox[{"5.0", "I"}]}], ",", " ", 
+     RowBox[{"7.25", "+", 
+      RowBox[{"7.3", "I"}]}], ",", " ", 
+     RowBox[{"6.4", "+", 
+      RowBox[{"9.6", "I"}]}], ",", " ", 
+     RowBox[{"4.15", "+", 
+      RowBox[{"12.55", "I"}]}], ",", " ", 
+     RowBox[{"0.6", "+", 
+      RowBox[{"10", "I"}]}], ",", " ", 
+     RowBox[{"1.4", "+", 
+      RowBox[{"6", "I"}]}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.690957227211853*^9, 3.690957305618455*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"polyPoints", " ", "=", " ", 
+  RowBox[{"PolygonCoordinates", "[", "polyList", "]"}]}]], "Input",
+ CellChangeTimes->{{3.690957312836172*^9, 3.690957339435545*^9}, {
+  3.6910548761839113`*^9, 3.691054884199465*^9}, {3.6910550212767887`*^9, 
+  3.691055024876081*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"4.`", ",", "0.45`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6.05`", ",", "1.85`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7.25`", ",", "5.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7.25`", ",", "7.3`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6.4`", ",", "9.6`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4.15`", ",", "12.55`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.6`", ",", "10.`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.4`", ",", "6.`"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.690957339961679*^9, 3.6910548847189617`*^9, 
+  3.691054991380458*^9, 3.6910550254253807`*^9, 3.691055272202409*^9, 
+  3.6910560620756893`*^9, 3.691056108602626*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sides", "=", 
+  RowBox[{"PolygonSides", "[", "polyPoints", "]"}]}]], "Input",
+ CellChangeTimes->{{3.691054888125986*^9, 3.6910549030296907`*^9}, {
+  3.6910549386460323`*^9, 3.6910549503649483`*^9}, {3.691055097185446*^9, 
+  3.691055098650793*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "2.482438317461282`", ",", "3.370830758136635`", ",", "2.3`", ",", 
+   "2.4520399670478454`", ",", "3.7101212918178303`", ",", 
+   "4.3709266752028695`", ",", "4.079215610874228`", ",", 
+   "6.128825336065631`"}], "}"}]], "Output",
+ CellChangeTimes->{{3.691054897288013*^9, 3.691054959637258*^9}, 
+   3.691054993724193*^9, 3.691055029175829*^9, 3.6910550997794437`*^9, 
+   3.691055274232657*^9, 3.6910560621319237`*^9, 3.691056110550243*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"angles", "=", 
+  RowBox[{"PolygonAngles", "[", "polyPoints", "]"}]}]], "Input",
+ CellChangeTimes->{{3.691055031319854*^9, 3.691055040019565*^9}, {
+  3.691055102043562*^9, 3.691055103617219*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1.4097267234121067`", ",", "2.5339506062908472`", ",", 
+   "2.7776136970801484`", ",", "2.7875952167578966`", ",", 
+   "2.844002904498832`", ",", "1.599474458537509`", ",", 
+   "1.9963098211252608`", ",", "2.9008824938361575`"}], "}"}]], "Output",
+ CellChangeTimes->{3.691055040470888*^9, 3.6910551040351877`*^9, 
+  3.691055276534856*^9, 3.691056062196184*^9, 3.691056112819459*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "lambda1", ",", "lambda2", ",", "lambda3", ",", "lambda4", ",", "lambda5", 
+    ",", " ", "lambda6", ",", " ", "lambda7", ",", " ", "lambda8"}], "}"}], 
+  " ", "=", " ", 
+  RowBox[{"SideRatios", "[", "sides", "]"}]}]], "Input",
+ CellChangeTimes->{{3.691056308227188*^9, 3.691056368150023*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.9999999999999999`", ",", "1.357870902340843`", ",", 
+   "0.9265084186873749`", ",", "0.9877546401859748`", ",", 
+   "1.494547222269782`", ",", "1.760739287843772`", ",", 
+   "1.6432293935286675`", ",", "2.46887316109969`"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.691056309993086*^9, {3.691056368878018*^9, 3.691056388042062*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+   "alpha1", ",", "alpha2", ",", "alpha3", ",", "alpha4", ",", "alpha5", ",", 
+    "alpha6", ",", "alpha7", ",", "alpha8"}], "}"}], " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Alpha", "[", "#", "]"}], "&"}], "/@", "angles"}]}]], "Input",
+ CellChangeTimes->{{3.6910563981215677`*^9, 3.691056438964221*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "0.5512700471204441`"}], ",", 
+   RowBox[{"-", "0.193418470916213`"}], ",", 
+   RowBox[{"-", "0.11585810021987986`"}], ",", 
+   RowBox[{"-", "0.11268088382731456`"}], ",", 
+   RowBox[{"-", "0.09472575916260662`"}], ",", 
+   RowBox[{"-", "0.4908714671490453`"}], ",", 
+   RowBox[{"-", "0.3645548480500347`"}], ",", 
+   RowBox[{"-", "0.07662042355446186`"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.69105644014393*^9}]
+}, Open  ]],
+
+Cell["System of Equations:", "Subsubsection",
+ CellChangeTimes->{{3.691055378153956*^9, 3.6910553827200108`*^9}}]
+}, Open  ]]
+},
+WindowSize->{1131, 702},
+WindowMargins->{{4, Automatic}, {1, Automatic}},
+Magnification:>0.75 Inherited,
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 28, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 99, 1, 48, "Section"],
+Cell[682, 25, 10188, 271, 682, "Input"],
+Cell[10873, 298, 713, 21, 25, "Input"],
+Cell[CellGroupData[{
+Cell[11611, 323, 288, 5, 25, "Input"],
+Cell[11902, 330, 764, 21, 25, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12703, 356, 271, 5, 25, "Input"],
+Cell[12977, 363, 483, 9, 25, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13497, 377, 218, 4, 25, "Input"],
+Cell[13718, 383, 425, 8, 25, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14180, 396, 348, 8, 25, "Input"],
+Cell[14531, 406, 378, 8, 25, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14946, 419, 365, 9, 25, "Input"],
+Cell[15314, 430, 473, 11, 25, "Output"]
+}, Open  ]],
+Cell[15802, 444, 113, 1, 27, "Subsubsection"]
+}, Open  ]]
+}
+]
+*)
+
